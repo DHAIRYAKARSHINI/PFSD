@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>SongSphere</title>
+</head>
+<body>
+    {% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">SongSphere</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/musicbeats/songs">All Songs</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/musicbeats/login">Login</a>
+                        <a class="dropdown-item" href="/musicbeats/signup">Register</a>
+                        <a class="dropdown-item" href="/musicbeats/watchlater">Watch Later</a>
+
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 ml-auto"> <!-- Use ml-auto to move the search form to the right -->
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static '/musicbeats/image2.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static '/musicbeats/image.png' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+    <!---################################Cards-------------->
+    <h2 style="padding-left: 7%;padding-top: 2%; font-family: 'verdana';">Trending Songs</h2>
+    <div class="row" style="padding-top: 2%;padding-left: 7%;">
+        {%for i in song %}
+
+<div class="card" style="width: 18rem;">
+  <img src="/media/{{i.image}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{i.name}}</h5>
+    <p class="card-text"></p>
+    <a href="/musicbeats/songs/{{i.song_id}}" class="btn btn-primary">Listen</a>
+  </div>
+</div>
+        {% endfor %}
+
+</div>
+
+<!-----English------->
+     <h2 style="padding-left: 7%; padding-top: 2%; font-family: 'verdana';">English Songs</h2>
+<div class="row" style="padding-top: 2%; padding-left: 7%;">
+    {% for i in song %}
+        {% if i.tags == "#English" %}
+        <div class="card" style="width: 18rem; margin-right: 10px;">
+            <img src="/media/{{i.image}}"  class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.name }}</h5>
+            <a href="/musicbeats/songs/{{i.song_id}}" class="btn btn-primary">Listen</a>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+
+    <!-------Hindi--------->
+      <h2 style="padding-left: 7%; padding-top: 2%; font-family: 'verdana';">Hindi Songs</h2>
+<div class="row" style="padding-top: 2%; padding-left: 7%;">
+    {% for i in song %}
+        {% if i.tags == "#hindi" %}
+        <div class="card" style="width: 18rem; margin-right: 10px;">
+            <img src="/media/{{i.image}}"  class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.name }}</h5>
+                <a href="/musicbeats/songs/{{i.song_id}}" class="btn btn-primary">Listen</a>
+
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+    <!---------Telugu------------->
+       <h2 style="padding-left: 7%; padding-top: 2%; font-family: 'verdana';">Telugu Songs</h2>
+<div class="row" style="padding-top: 2%; padding-left: 7%;">
+    {% for i in song %}
+        {% if i.tags == "#Telugu" %}
+        <div class="card" style="width: 18rem; margin-right: 10px;">
+            <img src="/media/{{i.image}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.name }}</h5>
+                <a href="/musicbeats/songs/{{i.song_id}}" class="btn btn-primary">Listen</a>
+
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<!-- Your content goes here -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
